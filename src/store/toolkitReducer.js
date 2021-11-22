@@ -24,14 +24,15 @@ export const addNewUser = createAction("ADDNEWUSER");
 
 export default createReducer(initialState, {
     [addNewUser]: (state, action) => {
-        console.log(state)
         state.addNewUser = [
             ...state.addNewUser,
             // {
             //     name: action.payload.nameFolder,
-            //     direction: action.payload.locationPatname,
-            //     id: uuidv4(),
-            //     type: 'folder',
+            //     lastName: action.payload.locationPatname,
+            //     email: 'folder',
+            //     address: "",
+            //     phone: "",
+            //     id: new Date().toDateString,
             // },
         ]
     },
