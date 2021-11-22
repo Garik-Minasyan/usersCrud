@@ -1,12 +1,12 @@
 import React from "react";
 import ReactTable from 'react-table-6';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteUserList } from './../store/toolkitReducer';
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import 'react-table-6/react-table.css';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-
 
 const UsersTable = styled.div`
     width: 100%;
@@ -14,17 +14,19 @@ const UsersTable = styled.div`
     justify-content: center;
     align-items: center;
 `
-const ButtonsWrapp = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 30px;
-`
 
 const UsersCrudsTable = () => {
     const usersCrud = useSelector(state => state.toolkit.usersCrud);
+    const dispatch = useDispatch();
+
+
+
     const data = usersCrud;
+    const deleteList = () => {
+        dispatch(deleteUserList({
+            id: data[0]?.id
+        }))
+    }
     const columns = [
         {
             Header: 'Name',
@@ -54,7 +56,7 @@ const UsersCrudsTable = () => {
         {
             Header: 'Delete',
             accessor: 'delete',
-            Cell: () => <Button variant="outlined" color="secondary"><DeleteIcon /></Button>
+            Cell: () => <Button onClick={deleteList} variant="outlined" color="secondary"><DeleteIcon /></Button>
         }
     ]
     return (

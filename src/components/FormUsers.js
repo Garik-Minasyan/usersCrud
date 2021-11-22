@@ -1,7 +1,5 @@
 import React from "react";
 import TextField from '@material-ui/core/TextField';
-import { Button } from "@material-ui/core";
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 import styled from "styled-components";
 
@@ -9,17 +7,37 @@ const FormFrap = styled.div`
     width: 400px;
     
 `
-const FormUsers = () => {
+const FormUsers = ({
+    addUserName,
+    addLastName,
+    addUserEmail,
+    addUserAddress,
+    addUserPhone,
+    // addNewUserTableList
+}) => {
+    const onNameChange = (e) => {
+        addUserName(e.target.value)
+    }
+    const onLastNameChange = (e) => {
+        addLastName(e.target.value)
+    }
+    const onEmailChange = (e) => {
+        addUserEmail(e.target.value)
+    }
+    const onAddressChange = (e) => {
+        addUserAddress(e.target.value)
+    }
+    const onPhoneChange = (e) => {
+        addUserPhone(e.target.value)
+    }
     return (
         <>
             <FormFrap>
-                <TextField style={{ marginTop: "10px" }} id="outlined-basic" label="name" variant="outlined" />
-                <TextField style={{ marginTop: "10px" }} id="outlined-basic" label="last name" variant="outlined" />
-                <TextField style={{ marginTop: "10px" }} id="outlined-basic" label="email" variant="outlined" />
-                <TextField style={{ marginTop: "10px" }} id="outlined-basic" label="address" variant="outlined" />
-                <TextField style={{ marginTop: "10px" }} id="outlined-basic" label="phone" variant="outlined" />
-                <Button style={{ position: 'absolute', top: "500px", left: "330" }} variant="outlined" color="secondary">< PersonAddIcon /></Button>
-
+                <TextField onChange={(e) => onNameChange(e)} style={{ marginTop: "10px" }} id="outlined-basic" label="name" variant="outlined" />
+                <TextField onChange={(e) => onLastNameChange(e)} style={{ marginTop: "10px" }} id="outlined-basic" label="last name" variant="outlined" />
+                <TextField onChange={(e) => onEmailChange(e)} style={{ marginTop: "10px" }} id="outlined-basic" label="email" variant="outlined" />
+                <TextField onChange={(e) => onAddressChange(e)} style={{ marginTop: "10px" }} id="outlined-basic" label="address" variant="outlined" />
+                <TextField onChange={(e) => onPhoneChange(e)} style={{ marginTop: "10px" }} id="outlined-basic" label="phone" variant="outlined" />
             </FormFrap>
         </>
     )
