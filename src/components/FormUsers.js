@@ -13,7 +13,7 @@ const FormUsers = ({
     addUserEmail,
     addUserAddress,
     addUserPhone,
-    // addNewUserTableList
+    inputEl
 }) => {
     const onNameChange = (e) => {
         addUserName(e.target.value)
@@ -33,7 +33,7 @@ const FormUsers = ({
     return (
         <>
             <FormFrap>
-                <TextField onChange={(e) => onNameChange(e)} style={{ marginTop: "10px" }} id="outlined-basic" label="name" variant="outlined" />
+                <TextField inputRef={inputEl} onChange={(e) => onNameChange(e)} style={{ marginTop: "10px" }} id="outlined-basic" label="name" variant="outlined" />
                 <TextField onChange={(e) => onLastNameChange(e)} style={{ marginTop: "10px" }} id="outlined-basic" label="last name" variant="outlined" />
                 <TextField onChange={(e) => onEmailChange(e)} style={{ marginTop: "10px" }} id="outlined-basic" label="email" variant="outlined" />
                 <TextField onChange={(e) => onAddressChange(e)} style={{ marginTop: "10px" }} id="outlined-basic" label="address" variant="outlined" />

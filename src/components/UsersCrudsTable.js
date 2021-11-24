@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactTable from 'react-table-6';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteUserList } from './../store/toolkitReducer';
@@ -13,15 +13,27 @@ const UsersTable = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-`
+`;
 
-const UsersCrudsTable = () => {
+const UsersCrudsTable = ({ onButtonClick }) => {
     const usersCrud = useSelector(state => state.toolkit.usersCrud);
+    const [data, setData] = useState([]);
     const dispatch = useDispatch();
+    const refTable = useRef(null)
 
+    useEffect(() => {
+        setData(usersCrud);
+    }, [usersCrud]);
 
+    const clickEditButton = (p) => {
+        console.log(p);
+        console.log(refTable.current.resolvedData[p.index].id)
+        const userId = refTable.current.resolvedData[p.index].id;
+        const editobarUser = usersCrud.filter(item => item.id === userId);
 
-    const data = usersCrud;
+        onButtonClick()
+    }
+
     const deleteList = () => {
         dispatch(deleteUserList({
             id: data[0]?.id
@@ -51,7 +63,7 @@ const UsersCrudsTable = () => {
         {
             Header: 'Edit',
             accessor: 'edid',
-            Cell: () => <Button variant="contained" color="primary"><EditIcon /></Button>
+            Cell: (props) => <Button onClick={() => clickEditButton(props)} variant="contained" color="primary"><EditIcon /></Button>
         },
         {
             Header: 'Delete',
@@ -62,7 +74,7 @@ const UsersCrudsTable = () => {
     return (
         <div>
             <UsersTable>
-                <ReactTable data={data} columns={columns} />
+                <ReactTable ref={refTable} data={data} columns={columns} />
             </UsersTable>
         </div>
     );

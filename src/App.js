@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './App.css';
 import UsersCrudsTable from './components/UsersCrudsTable';
 import FormUsers from './components/FormUsers';
@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 
 import { Button } from "@material-ui/core";
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import EditIcon from '@material-ui/icons/Edit';
+
 
 import styled from 'styled-components';
 
@@ -26,6 +28,8 @@ const App = () => {
     const [userPhone, setUserPhone] = useState("");
     const dispatch = useDispatch();
 
+    const inputEl = useRef();
+
     const addUserName = (valueName) => {
         setUserName(valueName)
     }
@@ -42,6 +46,14 @@ const App = () => {
         setUserPhone(valuePhone)
     }
 
+
+
+    const onButtonClick = () => {
+        inputEl.current.focus();
+        console.log(inputEl.current)
+
+    };
+
     const addNewUserTableList = () => {
         dispatch(addNewUser({
             name: userName,
@@ -56,18 +68,22 @@ const App = () => {
         <div className="App">
             <Header />
             <MainWrapper>
-                <FormUsers
-                    addUserName={addUserName}
-                    addLastName={addLastName}
-                    addUserEmail={addUserEmail}
-                    addUserAddress={addUserAddress}
-                    addUserPhone={addUserPhone}
-                />
-                <UsersCrudsTable />
-                <Button onClick={addNewUserTableList} style={{ position: 'absolute', top: "500px", left: "330" }} variant="outlined" color="secondary">< PersonAddIcon /></Button>
+                <div>
+                    <FormUsers
+                        addUserName={addUserName}
+                        addLastName={addLastName}
+                        addUserEmail={addUserEmail}
+                        addUserAddress={addUserAddress}
+                        addUserPhone={addUserPhone}
+                        inputEl={inputEl}
+                    />
+                    <Button onClick={addNewUserTableList} style={{ marginTop: "10px" }} variant="outlined" color="secondary">< PersonAddIcon /></Button>
+                    <Button style={{ marginLeft: "10px", marginTop: "10px" }} variant="outlined" color="secondary"> <EditIcon /> </Button>
+                </div>
+                <UsersCrudsTable onButtonClick={onButtonClick} />
 
-            </MainWrapper>
-        </div>
+            </MainWrapper >
+        </div >
     );
 }
 
