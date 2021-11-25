@@ -4,7 +4,6 @@ import { uuid } from 'uuidv4';
 const initialState = {
     usersCrud: [],
     editedValueForInput: []
-
 }
 export const addNewUser = createAction("ADDNEWUSER");
 export const deleteUserList = createAction("DELETEUSERLIST");
@@ -12,6 +11,7 @@ export const editUser = createAction("EDITUSER");
 
 export default createReducer(initialState, {
     [addNewUser]: (state, action) => {
+        console.log(action.payload, 'kkkkkkkkkkkkk')
         state.usersCrud = [
             ...state.usersCrud,
             {
@@ -32,6 +32,6 @@ export default createReducer(initialState, {
         })
     },
     [editUser]: (state, action) => {
-
+        console.log(action)
     }
 });

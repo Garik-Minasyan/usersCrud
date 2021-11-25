@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactTable from 'react-table-6';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteUserList } from './../store/toolkitReducer';
+import { deleteUserList, editUser } from './../store/toolkitReducer';
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import 'react-table-6/react-table.css';
@@ -26,11 +26,9 @@ const UsersCrudsTable = ({ onButtonClick }) => {
     }, [usersCrud]);
 
     const clickEditButton = (p) => {
-        console.log(p);
-        console.log(refTable.current.resolvedData[p.index].id)
         const userId = refTable.current.resolvedData[p.index].id;
         const editobarUser = usersCrud.filter(item => item.id === userId);
-
+        dispatch(editUser(editobarUser))
         onButtonClick()
     }
 
